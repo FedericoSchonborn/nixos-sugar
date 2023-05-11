@@ -1,45 +1,35 @@
 { lib
 , stdenv
-, fetchFromGitHub
+, fetchzip
 , alsaLib
-, autoreconfHook
-, glib
 , gobject-introspection
-, gtk3-x11
+, gtk3
 , intltool
 , librsvg
 , pkg-config
 , python3
-, xorg
 }:
 
 stdenv.mkDerivation rec {
   pname = "sugar-toolkit-gtk3";
   version = "0.120";
 
-  src = fetchFromGitHub {
-    owner = "sugarlabs";
-    repo = "sugar-toolkit-gtk3";
-    rev = "v${version}";
-    hash = "sha256-f3pKh0h/ZU3np4ZWTvFHp3Vgg1xEtb4Djp7ejwazCvM=";
+  src = fetchzip {
+    url = "https://download.sugarlabs.org/sources/sucrose/glucose/${pname}/${pname}-${version}.tar.xz";
+    hash = "sha256-3svYzr5mmp532OISBAUXLd904tnvHvWoi1W3jAJeZCA=";
   };
 
   nativeBuildInputs = [
-    autoreconfHook
     intltool
     pkg-config
   ];
 
   buildInputs = [
     alsaLib
-    glib
     gobject-introspection
-    gtk3-x11
+    gtk3
     librsvg
     python3
-    xorg.libICE
-    xorg.libSM
-    xorg.libX11
   ];
 
   meta = with lib; {

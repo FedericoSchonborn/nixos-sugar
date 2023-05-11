@@ -1,7 +1,6 @@
 { lib
 , stdenv
-, fetchFromGitHub
-, autoreconfHook
+, fetchzip
 , gtk3
 , iconnamingutils
 , pkg-config
@@ -16,15 +15,12 @@ stdenv.mkDerivation rec {
   pname = "sugar-artwork";
   version = "0.120";
 
-  src = fetchFromGitHub {
-    owner = "sugarlabs";
-    repo = "sugar-artwork";
-    rev = "v${version}";
-    hash = "sha256-qeoppZYzLNX5VkSkqCyXVZd3OlqO6zl0EmSuebpvXtY=";
+  src = fetchzip {
+    url = "https://download.sugarlabs.org/sources/sucrose/glucose/${pname}/${pname}-${version}.tar.xz";
+    hash = "sha256-5o4BwXCpRCwg650BVUBzuhXlECPBWY0LsMWyYdmyrf8=";
   };
 
   nativeBuildInputs = [
-    autoreconfHook
     pkg-config
     xorg.xcursorgen
   ];

@@ -1,8 +1,6 @@
 { lib
 , stdenv
-, fetchFromGitHub
-, autoreconfHook
-, glib
+, fetchzip
 , gtk3
 , intltool
 , pkg-config
@@ -14,22 +12,18 @@ stdenv.mkDerivation rec {
   pname = "sugar";
   version = "0.120";
 
-  src = fetchFromGitHub {
-    owner = "sugarlabs";
-    repo = "sugar";
-    rev = "v${version}";
-    hash = "sha256-vO1xWwMBhPd2CIAtR1AFJTv6cwoT5zrHsFEdm4hUsEY=";
+  src = fetchzip {
+    url = "https://download.sugarlabs.org/sources/sucrose/glucose/${pname}/${pname}-${version}.tar.xz";
+    hash = "sha256-aAzGq78KyeVWa4WO2wx3UwK9PKc86W041ukTXTRawFE=";
   };
 
   nativeBuildInputs = [
-    autoreconfHook
     intltool
     pkg-config
     shared-mime-info
   ];
 
   buildInputs = [
-    glib
     gtk3
     (python3.withPackages (pp: with pp; [
       empy
