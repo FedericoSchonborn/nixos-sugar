@@ -1,3 +1,3 @@
-self: super: {
+_self: super: {
   sugar = import ./. { pkgs = super; };
 }
