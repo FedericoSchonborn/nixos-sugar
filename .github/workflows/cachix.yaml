@@ -24,6 +24,7 @@ jobs:
         with:
           name: sugar
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+          installCommand: nix profile install nixpkgs#cachix
 
       - name: Push Flake Inputs
         run: nix flake archive --json | jq -r '.path , (.inputs | to_entries[].value.path)' | cachix push sugar
